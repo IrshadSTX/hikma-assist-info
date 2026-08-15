@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hikma Assist</title>
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --card: #ffffff;
+    --text: #12241f;
+    --muted: #5c6b66;
+    --border: #e2e7e5;
+    --primary: #0f6b52;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1512;
+      --card: #141d1a;
+      --text: #eef3f1;
+      --muted: #9fb0aa;
+      --border: #24312c;
+      --primary: #35c79b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0 20px 64px;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  main { max-width: 640px; margin: 0 auto; }
+  header { padding: 56px 0 24px; }
+  .brand {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+  h1 { font-size: 32px; line-height: 1.2; margin: 0 0 10px; letter-spacing: -.02em; }
+  p { color: var(--muted); }
+  .links { margin-top: 28px; display: grid; gap: 12px; }
+  a.tile {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    text-decoration: none;
+    color: var(--text);
+  }
+  a.tile strong { display: block; font-size: 17px; margin-bottom: 3px; }
+  a.tile span { font-size: 14px; color: var(--muted); }
+  footer {
+    margin-top: 44px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <span class="brand">Hikma Assist</span>
+    <h1>AI clinical assistant for doctors</h1>
+    <p>Hikma Assist helps licensed doctors document consultations, organise investigations, and
+    get AI clinical decision support at the point of care. AI output is advisory only and never
+    replaces a physician's judgement.</p>
+  </header>
+
+  <div class="links">
+    <a class="tile" href="privacy.html">
+      <strong>Privacy Policy</strong>
+      <span>What information the app handles, and your choices</span>
+    </a>
+    <a class="tile" href="support.html">
+      <strong>Help &amp; Support</strong>
+      <span>Contact us, or request account deletion</span>
+    </a>
+  </div>
+
+  <footer>
+    <p>Support: <a href="mailto:hikmaai2030@gmail.com">hikmaai2030@gmail.com</a></p>
+  </footer>
+</main>
+</body>
+</html>
