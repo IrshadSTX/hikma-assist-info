@@ -3,93 +3,270 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hikma Assist</title>
+<title>Hikma Assist — AI Clinical Assistant for Doctors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f6f7f9;
-    --card: #ffffff;
-    --text: #12241f;
-    --muted: #5c6b66;
-    --border: #e2e7e5;
-    --primary: #0f6b52;
+    --bg: #071713;
+    --card: #0D241E;
+    --card-border: rgba(16, 185, 129, 0.2);
+    --card-hover: #123028;
+    --primary: #10B981;
+    --primary-soft: rgba(16, 185, 129, 0.15);
+    --gold: #F59E0B;
+    --gold-soft: rgba(245, 158, 11, 0.15);
+    --text: #F3F4F6;
+    --text-muted: #9CA3AF;
+    --text-dim: #6B7280;
   }
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: light) {
     :root {
-      --bg: #0d1512;
-      --card: #141d1a;
-      --text: #eef3f1;
-      --muted: #9fb0aa;
-      --border: #24312c;
-      --primary: #35c79b;
+      --bg: #F8FAFC;
+      --card: #FFFFFF;
+      --card-border: #E2E8F0;
+      --card-hover: #F1F5F9;
+      --primary: #059669;
+      --primary-soft: rgba(5, 150, 105, 0.1);
+      --gold: #D97706;
+      --gold-soft: rgba(217, 119, 6, 0.1);
+      --text: #0F172A;
+      --text-muted: #475569;
+      --text-dim: #94A3B8;
     }
   }
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    margin: 0;
-    padding: 0 20px 64px;
-    background: var(--bg);
+    background-color: var(--bg);
     color: var(--text);
-    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    padding: 40px 20px 80px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
   }
-  main { max-width: 640px; margin: 0 auto; }
-  header { padding: 56px 0 24px; }
-  .brand {
-    display: inline-block;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--primary);
-    margin-bottom: 10px;
+  .container {
+    max-width: 680px;
+    width: 100%;
   }
-  h1 { font-size: 32px; line-height: 1.2; margin: 0 0 10px; letter-spacing: -.02em; }
-  p { color: var(--muted); }
-  .links { margin-top: 28px; display: grid; gap: 12px; }
-  a.tile {
-    display: block;
+  header {
+    text-align: center;
+    padding: 32px 0 24px;
+  }
+  .logo-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 76px;
     background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 18px;
+    border: 1.5px solid var(--card-border);
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.18);
+    margin-bottom: 20px;
+  }
+  .logo-box svg {
+    width: 44px;
+    height: 44px;
+    fill: var(--primary);
+  }
+  .badge {
+    display: inline-block;
+    background: var(--primary-soft);
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+    margin-bottom: 14px;
+  }
+  p.lead {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 28px;
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .feature-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 18px 20px;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .feature-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+  }
+  .feature-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .feature-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .tiles {
+    display: grid;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  a.tile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 18px 22px;
     text-decoration: none;
     color: var(--text);
+    transition: all 0.2s ease;
   }
-  a.tile strong { display: block; font-size: 17px; margin-bottom: 3px; }
-  a.tile span { font-size: 14px; color: var(--muted); }
-  footer {
-    margin-top: 44px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
+  a.tile:hover {
+    background: var(--card-hover);
+    border-color: var(--primary);
+    transform: translateY(-1.5px);
+  }
+  a.tile strong {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  a.tile span {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  a.tile .arrow {
+    color: var(--primary);
+    font-size: 20px;
+    margin-left: 14px;
+  }
+  .store-links {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .store-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--primary);
+    color: #FFFFFF;
+    text-decoration: none;
     font-size: 14px;
-    color: var(--muted);
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+    transition: opacity 0.15s ease;
+  }
+  .store-btn:hover { opacity: 0.92; }
+  .disclaimer {
+    background: var(--card);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 12px 12px 0;
+    padding: 14px 16px;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin-bottom: 32px;
+  }
+  footer {
+    border-top: 1px solid var(--card-border);
+    padding-top: 24px;
+    font-size: 13px;
+    color: var(--text-dim);
+    text-align: center;
+  }
+  footer a {
+    color: var(--primary);
+    text-decoration: none;
   }
 </style>
 </head>
 <body>
-<main>
+<div class="container">
   <header>
-    <span class="brand">Hikma Assist</span>
-    <h1>AI clinical assistant for doctors</h1>
-    <p>Hikma Assist helps licensed doctors document consultations, organise investigations, and
-    get AI clinical decision support at the point of care. AI output is advisory only and never
-    replaces a physician's judgement.</p>
+    <div class="logo-box">
+      <svg viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+    </div>
+    <div><span class="badge">Clinical Decision Support</span></div>
+    <h1>Hikma Assist</h1>
+    <p class="lead">An intelligent AI clinical decision-support and consultation documentation assistant engineered exclusively for practicing licensed physicians and healthcare professionals.</p>
   </header>
 
-  <div class="links">
-    <a class="tile" href="privacy.html">
-      <strong>Privacy Policy</strong>
-      <span>What information the app handles, and your choices</span>
-    </a>
-    <a class="tile" href="support.html">
-      <strong>Help &amp; Support</strong>
-      <span>Contact us, or request account deletion</span>
+  <div class="store-links">
+    <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.hikmaai.assist.app" target="_blank" rel="noopener">
+      <span>Get on Google Play</span>
     </a>
   </div>
 
+  <div class="feature-grid">
+    <div class="feature-card">
+      <h3>⚡ Structured SOEP Notes</h3>
+      <p>Automated conversion of consultation dialogues into standardized Subjective, Objective, Evaluation, and Plan notes.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🛡️ Dual-Source Integrity</h3>
+      <p>Strict clinical provenance separating physician-documented facts from AI-generated advisory suggestions.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🔬 Lab Analysis &amp; Flags</h3>
+      <p>Instant parsing of structured blood panels, microbiology, and radiology with automatic abnormal value detection.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🔒 Clinical Guardrails</h3>
+      <p>Active patient chart isolation and cross-patient validation to prevent documentation errors during rounds.</p>
+    </div>
+  </div>
+
+  <div class="tiles">
+    <a class="tile" href="privacy.html">
+      <div>
+        <strong>Privacy Policy &amp; Data Security</strong>
+        <span>Learn how clinical confidentiality and minimum necessary data practices are enforced.</span>
+      </div>
+      <div class="arrow">&rarr;</div>
+    </a>
+    <a class="tile" href="support.html">
+      <div>
+        <strong>Help &amp; Physician Support</strong>
+        <span>Contact clinical support, report technical inquiries, or manage your account.</span>
+      </div>
+      <div class="arrow">&rarr;</div>
+    </a>
+  </div>
+
+  <div class="disclaimer">
+    <strong>Professional Clinical Notice:</strong> Hikma Assist is an advisory decision-support platform intended solely for qualified healthcare professionals. All clinical outputs must be independently reviewed and confirmed by the attending clinician before use in patient care.
+  </div>
+
   <footer>
-    <p>Support: <a href="mailto:hikmaai2030@gmail.com">hikmaai2030@gmail.com</a><br>
-    © 2026 Nolwa Private Limited</p>
+    <p>Support: <a href="mailto:hikmaai2030@gmail.com">hikmaai2030@gmail.com</a></p>
+    <p style="margin-top: 6px;">&copy; 2026 NOLWA PRIVATE LIMITED. All rights reserved.</p>
   </footer>
-</main>
+</div>
 </body>
 </html>
